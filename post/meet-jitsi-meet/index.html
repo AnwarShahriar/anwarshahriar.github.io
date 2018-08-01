@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Meet Jitsi Meet (Part 1) - Installing Jitsi Meet on linux server</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="anwarshahriar" />
+  <meta name="description" content="Phew, what a day! Just finished my installtion of Jitsi meet on my linux server (DigitalOcean droplet).
+You know when you go to Jitsi website and start exploring as a beginner, you find it really hard to navigate, not so much documentation, any beginner like me can get lost easily and becomes frustrated.
+Well, I have my fare share of working knowledge on WebRTC and some SFU, I wanted to explore Jitsi meet too." />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@@anwarshahriar" />
+    <meta name="twitter:title" content="Meet Jitsi Meet (Part 1) - Installing Jitsi Meet on linux server" />
+    <meta name="twitter:description" content="Phew, what a day! Just finished my installtion of Jitsi meet on my linux server (DigitalOcean droplet).
+You know when you go to Jitsi website and start exploring as a beginner, you find it really hard to navigate, not so much documentation, any beginner like me can get lost easily and becomes frustrated.
+Well, I have my fare share of working knowledge on WebRTC and some SFU, I wanted to explore Jitsi meet too." />
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1471400974796-1c823d00a96f" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Meet Jitsi Meet (Part 1) - Installing Jitsi Meet on linux server" />
+  <meta property="og:description" content="Phew, what a day! Just finished my installtion of Jitsi meet on my linux server (DigitalOcean droplet).
+You know when you go to Jitsi website and start exploring as a beginner, you find it really hard to navigate, not so much documentation, any beginner like me can get lost easily and becomes frustrated.
+Well, I have my fare share of working knowledge on WebRTC and some SFU, I wanted to explore Jitsi meet too." />
+  <meta property="og:url" content="https://anwarshahriar.github.io/post/meet-jitsi-meet/" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1471400974796-1c823d00a96f" />
+
+
+
+
+<meta name="generator" content="Hugo 0.45.1" />
+
+
+<link rel="canonical" href="https://anwarshahriar.github.io/post/meet-jitsi-meet/" />
+<link rel="alternative" href="https://anwarshahriar.github.io/index.xml" title="anwarshahriar" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="_moDmnnBNVLBN1rzNxyGUGdPHE20YgbmrtzLIbxaWFc" />
+<meta name="msvalidate.01" content="22596E34341DD1D17D6022C44647E587" />
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="anwarshahriar" />
+<meta name="msapplication-tooltip" content="anwarshahriar" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://anwarshahriar.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://anwarshahriar.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://anwarshahriar.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://anwarshahriar.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://anwarshahriar.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://anwarshahriar.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://anwarshahriar.github.io/css/bundle.ff02473a9a.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://anwarshahriar.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">anwarshahriar</h2>
+  
+  <p class="subtitle">~ There are no dumb questions ~</p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://anwarshahriar.github.io/">Home</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://github.com/AnwarShahriar">Works</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://anwarshahriar.github.io/tags/">Tags</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:anwarshahriar@gmail.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/AnwarShahriar" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/@anwarshahriar" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//www.linkedin.com/in/anwarshahriar" title="Linkedin"><span class="icon icon-linkedin"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://anwarshahriar.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Meet Jitsi Meet (Part 1) - Installing Jitsi Meet on linux server</h1>
+      <p class="post-meta">@anwarshahriar · Jul 31, 2018 · 5 min read</p>
+    </header>
+    <article class="post-content">
+
+<p>Phew, what a day! Just finished my installtion of Jitsi meet on my linux server (DigitalOcean droplet).</p>
+
+<p>You know when you go to Jitsi website and start exploring as a beginner, you find it really hard to navigate, not so much documentation, any beginner like me can get lost easily and becomes frustrated.</p>
+
+<p>Well, I have my fare share of working knowledge on WebRTC and some SFU, I wanted to explore Jitsi meet too. So this post will not be the last, rather it will be the first one of a series. I&rsquo;ll keep writing about my journey and how to customize and tweak it eventually.</p>
+
+<h5 id="what-stuffs-do-you-need-this-is-my-list">What stuffs do you need? (This is my list)</h5>
+
+<ol>
+<li>A linux server - (Ubuntu-16.04 LTS)</li>
+<li>Jitsi meet repo (Don&rsquo;t worry <em>apt</em> will do that for us)</li>
+<li>nginx (Proxy)</li>
+<li>Let&rsquo;s encrypt (Everybody needs <em>https</em>)</li>
+<li>ufw (Uncomplicated firewall) (We will get it covered)</li>
+<li>A domain (I bought mine from <em>Namecheap</em>)</li>
+</ol>
+
+<blockquote>
+<p>They have a experimental Docker image for jitsi right now, but I didn&rsquo;t test that out.</p>
+</blockquote>
+
+<h5 id="i-m-using-digital-ocean-droplet-for-my-linux-machine-with-following-configuration">I&rsquo;m using Digital Ocean droplet for my linux machine with following configuration,</h5>
+
+<ol>
+<li><code>1</code> vCPU</li>
+<li><code>2GB</code> of memory</li>
+<li><code>25GB</code> of diskspace (You don&rsquo;t need that much actually)</li>
+<li><code>Ubuntu 16.04 LTS</code> with pre-installed <code>ufw</code> package (get it from apt)</li>
+</ol>
+
+<blockquote>
+<p>Now the best part, let&rsquo;s get it rolling.</p>
+</blockquote>
+
+<p>Spin up your server. I&rsquo;ll just start with a clean set, nothing preinstalled. Trust me having a freshly brewed server will save you from a lot of issues and shooting yourself in your foot. After spinning up the machine, it&rsquo;s time to register a domain. I got mine from <em>Namecheap</em>, you can get it from anywhere, just make sure you&rsquo;ve all the controls over the domain and DNS settings. Attach your &ldquo;domain&rdquo; with your server, DigitalOcean has great features to do it easily. You just have to add domain from <em>Add Domain</em> section and couple of <em>DNS</em> entry to <em>Domain/Nameservers</em> section in <em>Namecheap</em> dashboard.</p>
+
+<p>It&rsquo;s time for <code>ssh</code> into the server, make sure you&rsquo;ve the ssh access. Now at first we&rsquo;ll configure that firewall for our server. We&rsquo;ll use <code>ufw</code> to configure the firewall. <code>ufw</code> just a simple tools with which you can configure which port and which transport mechanism the server need to use to permit access from outside world. Now if you don&rsquo;t have it installed, please install it and come back to this article, I&rsquo;ll wait here.</p>
+
+<p>Now that you&rsquo;re done with your <code>ufw</code> configuration, we can move forward. At first check if <code>ufw</code> is enabled with the following command,</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; ufw status
+WARN: / is group writable!
+Status: active</code></pre></div>
+
+<p>If the status is not active, use the following command to activate it.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; ufw enable</code></pre></div>
+
+<p>Use the following port configurations with <em>ufw</em> to set up the firewall. You can use the following commands into the terminal.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; ufw allow in ssh
+&gt; ufw allow in <span style="color:#ae81ff">80</span>/tcp
+&gt; ufw allow in <span style="color:#ae81ff">443</span>/tcp
+&gt; ufw allow in <span style="color:#ae81ff">10000</span>:20000/udp</code></pre></div>
+
+<p>Run the <code>ufw status</code> command again to see the already configured port.</p>
+
+<p>Now it&rsquo;s time to setup the proxy server <em>nginx</em>. Install it with the following command,</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; sudo apt-get -y install nginx</code></pre></div>
+
+<p>It&rsquo;s <em>jitsi-meet</em> time! After you&rsquo;re done with <em>nginx</em> use the following commands to install jitsi,</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; wget -qO - https://download.jitsi.org/jitsi-key.gpg.key | sudo apt-key add -
+&gt; sudo sh -c <span style="color:#e6db74">&#34;echo &#39;deb https://download.jitsi.org stable/&#39; &gt; /etc/apt/sources.list.d/jitsi-stable.list&#34;</span>
+&gt; sudo apt-get -y update
+&gt; sudo apt-get -y install jitsi-meet</code></pre></div>
+
+<p>During the installation you&rsquo;ll be asked some things, that you&rsquo;ll have to handle correctly, otherwise you&rsquo;ve to start full cycle again (to ensure proper installation without thinking too much). Trust me I&rsquo;ve my fare share to go through the rabit hole.</p>
+
+<p>At the time of installation you&rsquo;ll be asked to enter your <code>hostname</code> attached with the server. Carefully enter your domain name, only the domain name without any type of <code>www</code> or <code>http|https</code> prefix. For example, I would enter my domain as <code>anwarshahriar.me</code> with nothing else prefixed with suffixed with the domain.</p>
+
+<p>After you enter you&rsquo;re domain, you&rsquo;ll be asked, if you want to <em>Generate a new self signed certificate</em> or do you want to <em>Use your own certificate</em>. Choose <em>Generate a new self signed certificate</em>, we&rsquo;ll get back to it later.</p>
+
+<p>Now the installtion will continue and eventually be completed. After the installation is complete, run the <em>install-letsencrypt-cert.sh</em> to configure <code>https</code> with <code>Let's encrypt</code>.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; /usr/share/jitsi-meet/scripts/install-letsencrypt-cert.sh</code></pre></div>
+
+<p>This script will ask your email address for proper reasons 🤪</p>
+
+<p>That&rsquo;s it! Now, if you head over to your website root, you&rsquo;ll see something like this,</p>
+
+<p><img src="https://anwarshahriar.github.io/img/jitsi-welcome.png" alt="jitsi welcome" /></p>
+
+<p>If this is something you see, Welcome 🎉 🎉 🎉 you&rsquo;ve done it.</p>
+
+<h5 id="in-case-you-ve-screwed-up">In case you&rsquo;ve screwed up 🔩 👆</h5>
+
+<p>If you think you&rsquo;ve screwed up everything just run the following command twice, because sometimes <code>jicofo</code> and <code>jitsi-videobridge</code> component doesn&rsquo;t get removed completely on the first run.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; apt-get purge jigasi jitsi-meet jitsi-meet-web-config jitsi-meet-prosody jitsi-meet-web jicofo jitsi-videobridge</code></pre></div>
+
+<p>and the following command to remove <code>nginx</code>.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; sudo apt-get purge nginx-full nginx-common</code></pre></div>
+
+<p>Now it&rsquo;s time to start over 🤕</p>
+
+<blockquote>
+<p>This post is a written form of <a href="https://www.youtube.com/watch?v=8KR0AhDZF2A">This video</a> with few alteration as needed.</p>
+</blockquote>
+
+<p>If you like this post. Share it/ Tweek it. Live long and prosper 🖖</p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://anwarshahriar.github.io/tags/jitsi"><span class="tag">Jitsi</span></a></li>
+        
+          <li><a href="https://anwarshahriar.github.io/tags/webrtc"><span class="tag">Webrtc</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "anwarshahriar" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 anwarshahriar</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://anwarshahriar.github.io/js/bundle.d1288006cf.js"></script>
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-XXXXXXXX-X', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+  </body>
+</html>

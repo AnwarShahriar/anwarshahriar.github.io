@@ -3,17 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://anwarshahriar.github.io/post/meet-jitsi-meet/</loc>
+    <lastmod>2018-07-31T23:44:13-04:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://anwarshahriar.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>https://anwarshahriar.github.io/tags/jitsi/</loc>
+    <lastmod>2018-07-31T23:44:13-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://anwarshahriar.github.io/post/</loc>
+    <lastmod>2018-07-31T23:44:13-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://anwarshahriar.github.io/tags/</loc>
+    <lastmod>2018-07-31T23:44:13-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://anwarshahriar.github.io/tags/webrtc/</loc>
+    <lastmod>2018-07-31T23:44:13-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://anwarshahriar.github.io/</loc>
+    <lastmod>2018-07-31T23:44:13-04:00</lastmod>
     <priority>0</priority>
   </url>
   
